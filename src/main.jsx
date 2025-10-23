@@ -1,13 +1,35 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import MainLayout from './Layouts/MainLayout';
+import Home from './Components/Home';
+import AddCoffee from './Components/AddCoffee';
+import UpdateCoffee from './Components/UpdateCoffee';
 
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <div>Hello world!</div>,
+    Component: MainLayout,
+    children:[
+      {
+        index : true,
+        Component: Home
+      },
+      {
+        path: 'addCoffee',
+        Component : AddCoffee
+      },
+      {
+        path:"updateCoffee",
+        Component: AddCoffee
+      },
+      {
+        path: "updateCoffee",
+        Component : UpdateCoffee
+      }
+    ]
   },
 ]);
 
