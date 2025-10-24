@@ -6,6 +6,8 @@ import MainLayout from './Layouts/MainLayout';
 import Home from './Components/Home';
 import AddCoffee from './Components/AddCoffee';
 import UpdateCoffee from './Components/UpdateCoffee';
+import { ToastContainer} from 'react-toastify';
+
 
 
 const router = createBrowserRouter([
@@ -36,5 +38,18 @@ const router = createBrowserRouter([
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <RouterProvider router={router} />
+   <ToastContainer
+  position="top-right"
+  autoClose={3000}
+  hideProgressBar={false}
+  newestOnTop={false}
+  closeOnClick
+  rtl={false}
+  pauseOnFocusLoss
+  draggable
+  pauseOnHover
+  theme="light"
+/>
+
   </StrictMode>,
 )
