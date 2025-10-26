@@ -7,6 +7,7 @@ import Home from './Components/Home';
 import AddCoffee from './Components/AddCoffee';
 import UpdateCoffee from './Components/UpdateCoffee';
 import { ToastContainer} from 'react-toastify';
+import CoffeeDetails from './Components/CoffeeDetails';
 
 
 
@@ -17,20 +18,25 @@ const router = createBrowserRouter([
     children:[
       {
         index : true,
+        loader: ()=> fetch('http://localhost:3000/coffees'),
         Component: Home
       },
       {
         path: 'addCoffee',
         Component : AddCoffee
       },
+     
       {
-        path:"updateCoffee",
-        Component: AddCoffee
+        path: "coffees/:id",
+        loader: ({params}) => fetch(`http://localhost:3000/coffees/${params.id}`),
+        Component : CoffeeDetails
       },
       {
-        path: "updateCoffee",
+        path: "updateCoffees/:id",
+        loader: ({params})=> fetch(`http://localhost:3000/coffees/${params.id}`),
         Component : UpdateCoffee
-      }
+      },
+      
     ]
   },
 ]);
