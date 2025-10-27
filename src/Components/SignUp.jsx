@@ -13,13 +13,21 @@ const SignUp = () => {
     e.preventDefault();
     const form = e.target
     const formData = new FormData(form)
-    const {email , password, ...userProfile} =  Object.fromEntries(formData.entries())
-   
+    const {email , password, ...restFormData} =  Object.fromEntries(formData.entries())
+    
     
     createUser(email,password)
     .then(result => {
       console.log(result.user)
+     const userProfile = {
+      email,
+      ...restFormData,
+      creationTime: result?.user?.metadata?.creationTime
+,
+      lastSignInTime: result?.user?.metadata?.lastSignInTime
+  ,
 
+    }
       // save database
       fetch('http://localhost:3000/users', {
         method: 'POST',
