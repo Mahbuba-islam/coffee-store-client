@@ -3,15 +3,13 @@ import { FaEye } from 'react-icons/fa';
 import { AiFillEdit } from 'react-icons/ai';
 import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
-const CoffeeCard = ({coffee}) => {
+const CoffeeCard = ({coffee, coffees, setCoffees}) => {
     const {name,price,chef,photo, _id} = coffee
-
-   const handleDelete = (_id) => {
-   console.log(_id)
-
-//    sweet alert
-
-Swal.fire({
+   
+    // handle delete
+  const handleDelete = (_id) => {
+  //    sweet alert
+ Swal.fire({
   title: "Confirm Deletion",
   text: "This coffee entry will be permanently removed. Are you sure you want to proceed?",
   icon: "warning",
@@ -39,7 +37,11 @@ fetch(`http://localhost:3000/coffees/${_id}`, {
   text: `"${name}" has been removed from your coffee list.`,
   icon: "success"
 });
-
+ 
+// remove the coffee from the state
+const remainingCoffees = coffees.filter(c => c._id !== _id)
+setCoffees(remainingCoffees)
+ 
      }
 })
 

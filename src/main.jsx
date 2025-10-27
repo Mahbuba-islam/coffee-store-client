@@ -6,8 +6,10 @@ import MainLayout from './Layouts/MainLayout';
 import Home from './Components/Home';
 import AddCoffee from './Components/AddCoffee';
 import UpdateCoffee from './Components/UpdateCoffee';
-import { ToastContainer} from 'react-toastify';
 import CoffeeDetails from './Components/CoffeeDetails';
+import SignIn from './Components/SignIn';
+import SignUp from './Components/SignUp';
+import AuthProvider from './context/AuthProvider';
 
 
 
@@ -36,26 +38,25 @@ const router = createBrowserRouter([
         loader: ({params})=> fetch(`http://localhost:3000/coffees/${params.id}`),
         Component : UpdateCoffee
       },
+      {
+       path: 'signIn',
+      Component : SignIn
       
-    ]
+      },
+      {
+        path: 'signUp',
+        Component: SignUp
+      }
+    
+    ],
+    
   },
 ]);
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
-   <ToastContainer
-  position="top-right"
-  autoClose={3000}
-  hideProgressBar={false}
-  newestOnTop={false}
-  closeOnClick
-  rtl={false}
-  pauseOnFocusLoss
-  draggable
-  pauseOnHover
-  theme="light"
-/>
-
+   <AuthProvider>
+     <RouterProvider router={router} />
+   </AuthProvider>
   </StrictMode>,
 )
